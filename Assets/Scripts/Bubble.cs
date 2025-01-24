@@ -1,3 +1,4 @@
+using System;
 using DefaultNamespace;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class Bubble : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
 
+    public event Action Escaped;
     public bool Initialized { get; private set; }
 
     private ICharacter _character;
@@ -65,6 +67,7 @@ public class Bubble : MonoBehaviour
     {
         if (!_bubbleBounds.InsideBounds(this))
         {
+            Escaped?.Invoke();
             Destroy(gameObject);
         }
     }

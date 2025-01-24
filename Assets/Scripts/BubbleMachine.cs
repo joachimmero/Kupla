@@ -7,6 +7,7 @@ namespace DefaultNamespace
         [SerializeField] private float interval;
         [SerializeField] private int amount;
         [SerializeField] private Bubble prefab;
+        [SerializeField] private Transform origin;
 
         private float _lastBurst;
 
@@ -22,8 +23,8 @@ namespace DefaultNamespace
                 for (int i = 0; i < amount; i++)
                 {
                     Bubble bubble = Instantiate(prefab, new Vector3(
-                        Random.Range(-5f, 5f),
-                        Random.Range(-5f, 5f),
+                        Random.Range(-1.5f, 1.5f),
+                        Random.Range(-1.5f, 1.5f),
                         0f), Quaternion.identity);
 
                     bubble.AddForce(new Vector2(
