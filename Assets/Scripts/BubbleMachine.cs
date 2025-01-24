@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Reflection;
+using UnityEngine;
 
 namespace DefaultNamespace
 {
@@ -9,7 +10,18 @@ namespace DefaultNamespace
         [SerializeField] private Bubble prefab;
         [SerializeField] private Transform origin;
 
+        public bool Initialized { get; private set; }
+
+        private IGameState _gameState;
+
         private float _lastBurst;
+
+        public void Initialize(IGameState gameState)
+        {
+            _gameState = gameState;
+
+            Initialized = true;
+        }
 
         public void Start()
         {
@@ -18,6 +30,16 @@ namespace DefaultNamespace
 
         private void Update()
         {
+            if (!Initialized)
+            {
+                return;
+            }
+
+            if (!_gameState.Started)
+            {
+                return;
+            }
+
             if (Time.time >= _lastBurst + interval)
             {
                 for (int i = 0; i < amount; i++)
