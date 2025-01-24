@@ -4,14 +4,6 @@ namespace DefaultNamespace
 {
     public class RandomCharacter : ICharacter
     {
-        private string[] _characters = new[]
-        {
-            "a",
-            "b",
-            "c",
-            "d"
-        };
-
         private readonly Random _random;
 
         private string _value;
@@ -25,7 +17,14 @@ namespace DefaultNamespace
         {
             if (_value == null)
             {
-                _value = _characters[_random.Next(0, _characters.Length)];
+                // Generating a random number.
+                var rand = _random.Next(0, 26);
+
+                // Generating random character by converting
+                // the random number into character.
+                char letter = Convert.ToChar(rand + 97);
+
+                _value = letter.ToString();
             }
 
             return _value;
