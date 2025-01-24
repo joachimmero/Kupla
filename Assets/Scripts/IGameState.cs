@@ -2,6 +2,6 @@
 {
     public interface IGameState
     {
-        bool Started { get; }
+        GameStateValue Value { get; }
     }
 }

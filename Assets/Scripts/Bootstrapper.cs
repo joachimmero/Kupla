@@ -10,22 +10,31 @@ namespace DefaultNamespace
 
         private ILives _lives;
 
+        private bool _startReceived;
         private int _escapedBubbleCount;
         private GameState _gameState;
 
         private void Awake()
         {
             _lives = new EscapedBubblesLives(() => _escapedBubbleCount);
-            _gameState = new GameState();
+            _gameState = new GameState(() => _startReceived, _lives);
         }
 
         private void Update()
         {
-            if (!_gameState.Started)
+            if (_gameState.Value == GameStateValue.NotStarted)
             {
                 if (Input.anyKeyDown)
                 {
-                    _gameState.StartGame();
+                    _startReceived = true;
+                }
+            }
+
+            if (_gameState.Value == GameStateValue.Ended)
+            {
+                if (Input.anyKeyDown)
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: 0);
                 }
             }
 
@@ -68,11 +77,6 @@ namespace DefaultNamespace
                 }
 
                 gameStateView.Initialize(_gameState);
-            }
-
-            if (_lives.Count() == 0)
-            {
-                SceneManager.LoadScene(sceneBuildIndex: 0);
             }
         }
     }

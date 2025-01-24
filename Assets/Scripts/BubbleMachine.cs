@@ -35,7 +35,7 @@ namespace DefaultNamespace
                 return;
             }
 
-            if (!_gameState.Started)
+            if (_gameState.Value != GameStateValue.Started)
             {
                 return;
             }

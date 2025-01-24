@@ -25,9 +25,12 @@ namespace DefaultNamespace
                 return;
             }
 
-            text.text = _gameState.Started
-                ? ""
-                : "Press any key to start";
+            text.text = _gameState.Value switch
+            {
+                GameStateValue.NotStarted => "Press any key to start",
+                GameStateValue.Started => "",
+                GameStateValue.Ended => "Game Over!\nPress any key to restart"
+            };
         }
     }
 }
