@@ -24,7 +24,7 @@ namespace DefaultNamespace
                     Bubble bubble = Instantiate(prefab, new Vector3(
                         Random.Range(-5f, 5f),
                         Random.Range(-5f, 5f),
-                        Random.Range(-5f, 5f)), Quaternion.identity);
+                        0f), Quaternion.identity);
 
                     bubble.AddForce(new Vector2(
                         Random.Range(-1f, 1f),

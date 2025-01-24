@@ -4,6 +4,8 @@ namespace DefaultNamespace
 {
     public class Bootstrapper : MonoBehaviour
     {
+        [SerializeField] private BubbleBounds bubbleBounds;
+
         private void Update()
         {
             foreach (var bubble in FindObjectsOfType<Bubble>())
@@ -13,7 +15,7 @@ namespace DefaultNamespace
                     continue;
                 }
 
-                bubble.Initialize(new RandomCharacter());
+                bubble.Initialize(new RandomCharacter(), bubbleBounds);
             }
         }
     }

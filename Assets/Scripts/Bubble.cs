@@ -9,11 +9,14 @@ public class Bubble : MonoBehaviour
     public bool Initialized { get; private set; }
 
     private ICharacter _character;
+    private BubbleBounds _bubbleBounds;
     private Vector2 _force;
 
-    public void Initialize(ICharacter character)
+    public void Initialize(ICharacter character, BubbleBounds bubbleBounds)
     {
         _character = character;
+        _bubbleBounds = bubbleBounds;
+
         Initialized = true;
     }
 
@@ -32,6 +35,7 @@ public class Bubble : MonoBehaviour
         BindText();
         HandleInput();
         Fly();
+        HandleBounds();
     }
 
     private void BindText()
@@ -55,5 +59,13 @@ public class Bubble : MonoBehaviour
     private void Fly()
     {
         transform.Translate(_force * Time.deltaTime);
+    }
+
+    private void HandleBounds()
+    {
+        if (!_bubbleBounds.InsideBounds(this))
+        {
+            Destroy(gameObject);
+        }
     }
 }
