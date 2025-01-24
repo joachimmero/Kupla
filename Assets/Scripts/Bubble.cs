@@ -9,11 +9,17 @@ public class Bubble : MonoBehaviour
     public bool Initialized { get; private set; }
 
     private ICharacter _character;
+    private Vector2 _force;
 
     public void Initialize(ICharacter character)
     {
         _character = character;
         Initialized = true;
+    }
+
+    public void AddForce(Vector2 force)
+    {
+        _force = force;
     }
 
     private void Update()
@@ -25,6 +31,7 @@ public class Bubble : MonoBehaviour
 
         BindText();
         HandleInput();
+        Fly();
     }
 
     private void BindText()
@@ -43,5 +50,10 @@ public class Bubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Fly()
+    {
+        transform.Translate(_force * Time.deltaTime);
     }
 }
