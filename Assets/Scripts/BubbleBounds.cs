@@ -11,10 +11,10 @@ namespace DefaultNamespace
         {
             Bounds bounds = Bounds();
 
-            return bubble.transform.position.x >= bounds.min.x &&
-                   bubble.transform.position.x <= bounds.max.y &&
-                   bubble.transform.position.y >= bounds.min.y &&
-                   bubble.transform.position.y <= bounds.max.y;
+            return bubble.transform.position.x >= bounds.min.x + (bubble.Size.x / 2) &&
+                   bubble.transform.position.x <= bounds.max.x - (bubble.Size.x / 2) &&
+                   bubble.transform.position.y >= bounds.min.y + (bubble.Size.y / 2) &&
+                   bubble.transform.position.y <= bounds.max.y - (bubble.Size.y / 2);
         }
 
         private Bounds Bounds()

@@ -6,9 +6,11 @@ using UnityEngine;
 public class Bubble : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     public event Action Escaped;
     public bool Initialized { get; private set; }
+    public Vector2 Size => spriteRenderer.size * transform.lossyScale;
 
     private ICharacter _character;
     private BubbleBounds _bubbleBounds;
