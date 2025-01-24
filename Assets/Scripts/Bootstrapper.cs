@@ -55,7 +55,7 @@ namespace DefaultNamespace
                     continue;
                 }
 
-                bubble.Initialize(new RandomCharacter(), bubbleBounds);
+                bubble.Initialize(new RandomCharacter(), bubbleBounds, _gameState);
                 bubble.Escaped += () => _escapedBubbleCount++;
             }
 

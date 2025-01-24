@@ -12,12 +12,14 @@ public class Bubble : MonoBehaviour
 
     private ICharacter _character;
     private BubbleBounds _bubbleBounds;
+    private IGameState _gameState;
     private Vector2 _force;
 
-    public void Initialize(ICharacter character, BubbleBounds bubbleBounds)
+    public void Initialize(ICharacter character, BubbleBounds bubbleBounds, IGameState gameState)
     {
         _character = character;
         _bubbleBounds = bubbleBounds;
+        _gameState = gameState;
 
         Initialized = true;
     }
@@ -38,6 +40,7 @@ public class Bubble : MonoBehaviour
         HandleInput();
         Fly();
         HandleBounds();
+        HandleGameState();
     }
 
     private void BindText()
@@ -68,6 +71,14 @@ public class Bubble : MonoBehaviour
         if (!_bubbleBounds.InsideBounds(this))
         {
             Escaped?.Invoke();
+            Destroy(gameObject);
+        }
+    }
+
+    private void HandleGameState()
+    {
+        if (_gameState.Value == GameStateValue.Ended)
+        {
             Destroy(gameObject);
         }
     }
